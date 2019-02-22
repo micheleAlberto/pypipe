@@ -1,5 +1,9 @@
 class Pipe:
     def __init__(self,*args):
+        """
+        initialize the pipe by passing arguments for the first function.
+        This is optional. Arguments passed here will be used
+        """
         self.args = args
         self.computation = []
 
@@ -17,9 +21,3 @@ class Pipe:
         #self.args = self.args + (other,) if len(self.args) > 0 else (other,)
         self.args = (*self.args,other)
         return self.__call__()
-
-def due(args):
-    return 2 * args
-
-def square(x):
-    return x**2
