@@ -1,3 +1,4 @@
+
 class Pipe:
     def __init__(self,*args):
         """
@@ -26,8 +27,14 @@ class Pipe:
 
     def __lshift__(self, other):
         """
-        pipe arguments in. They are appended after whatever you just passed
+        pipe arguments in. They are appended after whatever you just passed.
+        Multiple arguments can be passed as a tuple.
+
         """
         #self.args = self.args + (other,) if len(self.args) > 0 else (other,)
-        self.args = (*self.args,other)
-        return self.__call__()
+        if isinstance(other, tuple):
+            self.args = (*self.args,*other )
+        else:
+            self.args = (*self.args,other )
+        self = self.__call__()
+        return self
