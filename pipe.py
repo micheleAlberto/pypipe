@@ -58,18 +58,18 @@ class Pipe:
         self = self.__call__()
         return self
 
+if __name__ == "__main__":
+    # pipe first argument in Pipe() call, second argument with left pipe
+    p = Pipe(2) >> (lambda x,y:2*x + y)  << 3.
+    print(p)
 
-# pipe first argument in Pipe() call, second argument with left pipe
-p = Pipe(2) >> (lambda x,y:2*x + y)  << 3.
-print(p)
+    # pipe second argument in Pipe() using a placeholder for first arg, first argument with left pipe
+    _ = PlaceHolderArg()
+    p = Pipe(_,2) >> (lambda x,y:2*x + y)  << 3.
+    print(p)
 
-# pipe second argument in Pipe() using a placeholder for first arg, first argument with left pipe
-_ = PlaceHolderArg()
-p = Pipe(_,2) >> (lambda x,y:2*x + y)  << 3.
-print(p)
-
-# more complicated:
-def f(a,b,c,d):
-    return a,b,c,d
-p = Pipe(_,2.,_,4.) >> f  << (1.,3.)
-print(p)
+    # more complicated:
+    def f(a,b,c,d):
+        return a,b,c,d
+    p = Pipe(_,2.,_,4.) >> f  << (1.,3.)
+    print(p)
